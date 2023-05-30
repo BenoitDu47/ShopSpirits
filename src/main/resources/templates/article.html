@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="layout">
+<head>
+<meta charset="UTF-8">
+<title>Saisir un Article</title>
+
+</head>
+<body>
+<div layout:fragment="content">
+	<form th:action="@{/save}" method="post">
+  
+    <legend>Saisir nouvel article</legend>
+    
+    <div class="mb-3">
+      <label for="disabledTextInput" class="form-label">Nom</label>
+      <input type="text" id="disabledTextInput" class="form-control" name="name">
+      
+    </div>
+    
+       <div class="mb-3">
+      <label for="disabledTextInput" class="form-label">Marque</label>
+      <input type="text" id="disabledTextInput" class="form-control" name="brand">
+    </div>
+    
+      <div class="mb-3">
+      <label for="disabledTextInput" class="form-label">Description</label>
+      <input type="text" id="disabledTextInput" class="form-control" name="description">
+    </div>
+    
+          <div class="mb-3">
+      <label for="disabledTextInput" class="form-label">Prix</label>
+      <input type="text" id="disabledTextInput" class="form-control" name="price">
+    </div>
+    
+<div class="mb-3">
+    <label class="form-label">Catégorie</label>
+    <select class="form-select" name="category">
+        <option value="">Sélectionnez une catégorie</option>
+        <option th:each="category : ${categories}" th:value="${category}" th:text="${category.name}"></option>
+    </select>
+</div>
+    
+    <button type="submit" class="btn btn-primary">Ajouter</button>
+ 
+</form>
+	</div>
+</body>
+
+</html>

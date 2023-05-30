@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="layout">
+<head>
+<meta charset="UTF-8">
+<title>Article</title>
+
+</head>
+<body>
+<div layout:fragment="content">
+	<div class="card">
+		<div class="card-header">
+			<h1>Liste des spiritueux</h1>
+		</div>
+		<div class="card-body">
+			<div class="container">
+				<div class="panl-body">
+					<form th:action="@{/index}" method="get">
+						<label>Keyword</label> <input type="text" name="keyword"
+							th:value="${keyword}">
+						<button type="submit" class="btn btn-info">Search</button>
+					</form>
+				</div>
+			</div>
+
+			<div class="container">
+				 <table class="table">
+					<tr class="table-info">
+						<th>Nom</th>
+						<th>Description</th>
+						<th>Prix</th>
+					</tr>
+					<tr th:each="a:${listArticle}">
+						<td th:text="${a.name}"></td>
+						<td
+							th:text="${#strings.length(a.description) > 40 ? #strings.substring(a.description, 0, 37) + '...' : a.description}"
+							class="text-truncate"></td>
+						<td th:text="${a.price}"></td>
+						<td><a
+							th:href="@{delete(id=${a.id},page=${currentPage},keyword=${keyword})}">Supprimer</a></td>
+					</tr>
+				</table> 
+			</div>
+			<div class="container">
+				<div class="btn-toolbar" role="toolbar"
+					aria-label="Toolbar with button groups">
+					<div th:each="page,status:${pages}"
+						th:class="${currentPage == status.index ? 'btn-group active' : 'btn-group'}"
+						role="group" aria-label="First group">
+						<a th:href="@{/index(page=${status.index},keyword=${keyword})}"
+							class="btn btn-info" th:text="${status.index}"></a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	</div>
+</body>
+
+</html>
