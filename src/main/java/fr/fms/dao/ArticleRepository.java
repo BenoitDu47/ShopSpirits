@@ -12,4 +12,6 @@ public interface ArticleRepository extends JpaRepository<Article, Long> {
 	Page<Article> findByDescriptionContains(String description, PageRequest pageRequest);
 	public List<Article> findAll();
 	void deleteById(Long id);
+
+	Page<Article> findByCategory_IdAndDescriptionContains(Long categoryId, String kw, PageRequest of);
 }

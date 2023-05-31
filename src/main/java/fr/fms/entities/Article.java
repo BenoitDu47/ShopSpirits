@@ -2,11 +2,11 @@ package fr.fms.entities;
 
 import java.io.Serializable;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -17,7 +17,7 @@ import lombok.NonNull;
 
 @Entity
 @Data
-@NoArgsConstructor
+@NoArgsConstructor(force = true)
 @AllArgsConstructor
 @ToString
 public class Article implements Serializable {
@@ -31,6 +31,7 @@ public class Article implements Serializable {
 	@NonNull
 	private String brand;
 	@NonNull
+    @Size(min=10,max=200)
 	private String description;
 	@NonNull
 	private double price;
@@ -38,6 +39,11 @@ public class Article implements Serializable {
 	private int quantity;
 
 	@ManyToOne
+	@JoinColumn(name = "category_id")
+	@NotNull(message = "Category is required")
 	private Category category;
 
+	@ManyToOne
+	@JoinColumn(name = "cart_id")
+	private Cart cart;
 }

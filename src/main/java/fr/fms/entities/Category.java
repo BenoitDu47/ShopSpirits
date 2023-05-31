@@ -9,14 +9,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
 @Entity
 @Data
-@NoArgsConstructor
+@NoArgsConstructor(force = true)
 @AllArgsConstructor
 @ToString(exclude = "articles")
 public class Category implements Serializable {
@@ -24,7 +21,11 @@ public class Category implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+
+	@NonNull
 	private String name;
+
+	@NonNull
 	private String description;
 
 	@OneToMany(mappedBy = "category")
